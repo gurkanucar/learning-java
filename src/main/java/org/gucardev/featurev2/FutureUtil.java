@@ -1,26 +1,33 @@
 package org.gucardev.featurev2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public class FutureUtil {
 
   public static CompletableFuture<Map<String, Object>> allOf(
       Map<String, FutureOption<Supplier<Object>, Function<Throwable, Object>>> tasks) {
-    Map<String, CompletableFuture<?>> futures = tasks.entrySet()
-        .stream().collect(Collectors.toMap(x -> x.getKey(),
-            entry -> CompletableFuture.supplyAsync(entry.getValue().getMethod())
-                .exceptionally(entry.getValue().getException())));
 
-    CompletableFuture<Void> allFeatures = CompletableFuture.allOf(futures.values()
-        .toArray(new CompletableFuture[0]));
+    List<CompletableFuture<Void>> allFutures = new ArrayList<>();
 
-    return allFeatures.thenApply(v -> futures.entrySet().stream()
-        .collect(Collectors.toMap(x -> x.getKey(), entry -> entry.getValue().join())));
+    Map<String, Object> resultMap = new ConcurrentHashMap<>();
 
+    for (Map.Entry<String, FutureOption<Supplier<Object>, Function<Throwable, Object>>> task : tasks.entrySet()) {
+      CompletableFuture<Void> cf = CompletableFuture.supplyAsync(task.getValue().getMethod())
+          .exceptionally(task.getValue().getException())
+          .thenAccept(result -> resultMap.put(task.getKey(), result));
+
+      allFutures.add(cf);
+    }
+
+    return CompletableFuture.allOf(allFutures.toArray(new CompletableFuture[0]))
+        .thenApply(v -> resultMap);
   }
+
 
 }
