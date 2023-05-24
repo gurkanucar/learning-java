@@ -3,18 +3,18 @@ package org.gucardev.featurev2;
 public class FutureOption<T, U> {
 
   private final T method;
-  private final U action;
+  private final U exception;
 
-  public FutureOption(T method, U action) {
+  public FutureOption(T method, U exception) {
     this.method = method;
-    this.action = action;
+    this.exception = exception;
   }
 
   public T getMethod() {
     return method;
   }
 
-  public U getAction() {
-    return action;
+  public U getException() {
+    return exception;
   }
 }
