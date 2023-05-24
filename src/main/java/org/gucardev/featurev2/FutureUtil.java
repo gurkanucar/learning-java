@@ -10,6 +10,12 @@ import java.util.function.Supplier;
 
 public class FutureUtil {
 
+  public static <T> FutureOption<Supplier<T>, Function<Throwable, T>> createFutureOption(
+      Supplier<T> method, Function<Throwable, T> handler) {
+    return new FutureOption<>(method, handler);
+  }
+
+
   public static CompletableFuture<Map<String, Object>> allOf(
       Map<String, FutureOption<Supplier<Object>, Function<Throwable, Object>>> tasks) {
 
