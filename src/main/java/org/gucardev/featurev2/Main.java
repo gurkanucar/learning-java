@@ -25,13 +25,13 @@ public class Main {
 
     Map<String, FutureOption<Supplier<Object>, Function<Throwable, Object>>> features = new HashMap<>();
 
-    features.put("h1", new FutureOption<>(() -> sayHello("Gurkan"), e -> null));
-    features.put("h2", new FutureOption<>(() -> sayHello("Ahmet"), e -> null));
-    features.put("h3", new FutureOption<>(() -> sayHello("Mehmet"), e -> null));
-    features.put("h4",
+    features.put("sayHello1", new FutureOption<>(() -> sayHello("Gurkan"), e -> null));
+    features.put("sayHello2", new FutureOption<>(() -> sayHello("Ahmet"), e -> null));
+    features.put("sayHello3", new FutureOption<>(() -> sayHello("Mehmet"), e -> null));
+    features.put("getRequest1",
         new FutureOption<>(() -> getRequest("https://jsonplaceholder.typicode.com/posts/1", 5000),
             e -> null));
-    features.put("h5",
+    features.put("getRequest2",
         new FutureOption<>(() -> getRequest("https://jsonplaceholder.typicode.com/posts", 5000),
             e -> null));
 
