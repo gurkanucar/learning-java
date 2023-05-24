@@ -18,6 +18,10 @@ public class Main {
     return "hello " + name;
   }
 
+  public static String sayHello2(String name) {
+    throw new RuntimeException("error");
+  }
+
   public static void main(String[] args) {
     String url1 = "https://jsonplaceholder.typicode.com/posts/1";
     String url2 = "https://jsonplaceholder.typicode.com/posts";
@@ -30,11 +34,18 @@ public class Main {
     Map<String, FutureOption<Supplier<Object>, Function<Throwable, Object>>> features =
         new HashMap<>();
 
-    //features.put("sayHello1", new FutureOption<>(() -> sayHello("Gurkan"), e -> null));
+    // features.put("sayHello1", new FutureOption<>(() -> sayHello("Gurkan"), e -> null));
     features.put("sayHello1", createFutureOption(() -> sayHello("Gurkan"), e -> null));
 
     features.put("sayHello1", new FutureOption<>(() -> sayHello("Gurkan"), e -> null));
-    features.put("sayHello2", new FutureOption<>(() -> sayHello("Ahmet"), e -> null));
+    features.put(
+        "sayHello2",
+        new FutureOption<>(
+            () -> sayHello2("Ahmet"),
+            e -> {
+              System.out.println(e.getMessage());
+              return "EMPTY";
+            }));
     features.put("sayHello3", new FutureOption<>(() -> sayHello("Mehmet"), e -> null));
     features.put("getRequest1", new FutureOption<>(() -> getRequest(url1, 5000), e -> null));
     features.put("getRequest2", new FutureOption<>(() -> getRequest(url2, 5000), e -> null));
@@ -44,9 +55,9 @@ public class Main {
     System.out.println("time: " + (System.currentTimeMillis() - time));
 
     System.out.println(result.keySet());
-    // System.out.println(result.get("h1"));
-    // System.out.println(result.get("h2"));
-    // System.out.println(result.get("h3"));
+    System.out.println(result.get("sayHello1"));
+    System.out.println(result.get("sayHello2"));
+    // System.out.println(result.get("sayHello3"));
 
   }
 
