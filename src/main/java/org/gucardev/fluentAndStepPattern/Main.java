@@ -8,10 +8,11 @@ public class Main {
             .setAccount("email@example.com")
             .setShippingAddress("123 Street, City, State, Country")
             .setPaymentMethod("Credit Card")
-            .addProduct("Book", 15.99, 1)
-            .addProduct("Laptop", 1200.00, 1)
+            .addProduct(new Product("powerbank", 500, 1))
+            .addProduct(new Product("coffee", 20, 2))
             .finishProducts()
-            .setDeliveryOption("Express")
+            .setDiscount(120.9)
+            .setDeliveryOption(DeliveryOption.STANDARD)
             .build();
 
     System.out.println(order);

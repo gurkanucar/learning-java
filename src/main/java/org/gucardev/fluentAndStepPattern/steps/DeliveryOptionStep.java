@@ -1,6 +1,8 @@
 package org.gucardev.fluentAndStepPattern.steps;
 
+import org.gucardev.fluentAndStepPattern.DeliveryOption;
+
 public interface DeliveryOptionStep {
 
-  BuildStep setDeliveryOption(String deliveryOption);
+  BuildStep setDeliveryOption(DeliveryOption deliveryOption);
 }

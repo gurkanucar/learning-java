@@ -11,19 +11,22 @@ public class Order {
   private String shippingAddress;
   private String paymentMethod;
   private List<Product> products;
-  private String deliveryOption;
+  private DeliveryOption deliveryOption;
+  private double discount;
 
   public Order(
       String accountEmail,
       String shippingAddress,
       String paymentMethod,
       List<Product> products,
-      String deliveryOption) {
+      DeliveryOption deliveryOption,
+      double discount) {
     this.accountEmail = accountEmail;
     this.shippingAddress = shippingAddress;
     this.paymentMethod = paymentMethod;
     this.products = products;
     this.deliveryOption = deliveryOption;
+    this.discount = discount;
   }
 
   @Override
@@ -31,18 +34,20 @@ public class Order {
     return "Order{"
         + "accountEmail='"
         + accountEmail
-        + '\''
+        + '\n'
         + ", shippingAddress='"
         + shippingAddress
-        + '\''
+        + '\n'
         + ", paymentMethod='"
         + paymentMethod
-        + '\''
+        + '\n'
         + ", products="
         + products
-        + ", deliveryOption='"
+        + ", discount='"
+        + discount
+        + '\n'
+        + ", deliveryOption="
         + deliveryOption
-        + '\''
         + '}';
   }
 }
