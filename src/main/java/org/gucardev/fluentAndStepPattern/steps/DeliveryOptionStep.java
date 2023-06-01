@@ -1,4 +1,4 @@
-package org.gucardev.fluentAndStepPattern;
+package org.gucardev.fluentAndStepPattern.steps;
 
 public interface DeliveryOptionStep {
 
