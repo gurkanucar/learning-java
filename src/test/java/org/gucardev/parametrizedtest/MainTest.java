@@ -35,7 +35,34 @@ class MainTest {
   @MethodSource("provideTestScenarios")
   void doSomethingAndThrowError_givenExceptionType_throwException(
       Class<? extends RuntimeException> exceptionClass, ErrorType errorType) {
-
     assertThrows(exceptionClass, () -> main.doSomethingAndThrowError(errorType));
+  }
+
+  //
+  // Alternative way to test
+  //
+
+  private static class TestScenario {
+    final Class<? extends Exception> exceptionClass;
+    final ErrorType errorType;
+
+    private TestScenario(Class<? extends Exception> exceptionClass, ErrorType errorType) {
+      this.exceptionClass = exceptionClass;
+      this.errorType = errorType;
+    }
+  }
+
+  private static Stream<TestScenario> provideTestScenarios2() {
+    return Stream.of(
+        new TestScenario(NotFoundException.class, ErrorType.NOT_FOUND),
+        new TestScenario(AlreadyExistsException.class, ErrorType.ALREADY_EXISTS),
+        new TestScenario(CouldNotCompletedException.class, ErrorType.COULD_NOT_COMPLETED));
+  }
+
+  @ParameterizedTest
+  @MethodSource("provideTestScenarios2")
+  void doSomethingAndThrowError_givenExceptionType_throwException2(TestScenario testScenario) {
+    assertThrows(
+        testScenario.exceptionClass, () -> main.doSomethingAndThrowError(testScenario.errorType));
   }
 }
