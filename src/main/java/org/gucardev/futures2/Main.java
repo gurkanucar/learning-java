@@ -1,6 +1,6 @@
-package org.gucardev.featurev2;
+package org.gucardev.futures2;
 
-import static org.gucardev.featurev2.FutureUtil.createFutureOption;
+import static org.gucardev.futures2.FutureUtil.createFutureOption;
 
 import java.net.URL;
 import java.util.HashMap;

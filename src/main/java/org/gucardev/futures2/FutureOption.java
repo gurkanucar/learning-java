@@ -1,4 +1,4 @@
-package org.gucardev.featurev2;
+package org.gucardev.futures2;
 
 public class FutureOption<T, U> {
 
