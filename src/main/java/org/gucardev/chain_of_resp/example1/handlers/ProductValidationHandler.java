@@ -18,6 +18,6 @@ public class ProductValidationHandler extends Handler {
   }
 
   public boolean customerHasProducts(User user) {
-    return true;
+    return Math.random() > 0.5;
   }
 }

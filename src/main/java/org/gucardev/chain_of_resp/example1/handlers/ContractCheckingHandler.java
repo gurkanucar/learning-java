@@ -18,6 +18,6 @@ public class ContractCheckingHandler extends Handler {
   }
 
   public boolean areContractsValid(User user) {
-    return true;
+    return Math.random() > 0.5;
   }
 }
