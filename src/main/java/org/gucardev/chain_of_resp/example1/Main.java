@@ -19,5 +19,7 @@ public class Main {
             .setNextHandler(new ContractCheckingHandler());
 
     System.out.println(handler.handle(user));
+
+    System.out.println(user.getUsername());
   }
 }

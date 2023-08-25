@@ -8,7 +8,7 @@ public class ProductValidationHandler extends Handler {
   @Override
   public boolean handle(Object payload) {
     User user = (User) payload;
-
+    user.setUsername(user.getUsername()+"update2");
     if (!customerHasProducts(user)) {
       System.out.println("customer has no products!");
       return false;

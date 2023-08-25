@@ -8,7 +8,7 @@ public class ContractCheckingHandler extends Handler {
   @Override
   public boolean handle(Object payload) {
     User user = (User) payload;
-
+    user.setUsername(user.getUsername() + "update3");
     if (!areContractsValid(user)) {
       System.out.println("customer has no valid contracts!");
       return false;
