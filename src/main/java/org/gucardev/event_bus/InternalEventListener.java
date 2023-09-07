@@ -1,5 +1,6 @@
 package org.gucardev.event_bus;
 
+import com.google.common.eventbus.AllowConcurrentEvents;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ public class InternalEventListener {
   }
 
   @Subscribe
+  @AllowConcurrentEvents
   public void handleCustomEvent(CustomEvent event) {
     if (event.getEventTo().equals(EventTo.EXTERNAL)) return;
     log.info("Received INTERNAL event for route '{}': {}", event.getRoute(), event.getMessage());
