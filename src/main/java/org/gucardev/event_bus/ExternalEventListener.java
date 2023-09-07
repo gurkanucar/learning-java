@@ -1,6 +1,5 @@
 package org.gucardev.event_bus;
 
-import com.google.common.eventbus.AllowConcurrentEvents;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import lombok.extern.slf4j.Slf4j;
@@ -17,12 +16,12 @@ public class ExternalEventListener {
   }
 
   @Subscribe
-  @AllowConcurrentEvents
+//  @AllowConcurrentEvents
   public void handleCustomEvent(CustomEvent event) {
     if (event.getEventTo().equals(EventTo.INTERNAL)) return;
-    log.info("Received EXTERNAL event for route '{}': {}", event.getRoute(), event.getMessage());
+    log.info("Received EXTERNAL event for route '{}': {}", event.getRoute(), event.getProductName());
 
-    int randomDelay = 5000 + random.nextInt(5000);
+    int randomDelay = 0;//5000 + random.nextInt(5000);
 
     try {
       Thread.sleep(randomDelay);
@@ -30,6 +29,6 @@ public class ExternalEventListener {
       Thread.currentThread().interrupt();
       log.error("Thread interrupted while sleeping for delay.", e);
     }
-    eventBus.post(new CustomEvent(EventTo.INTERNAL, "closeProductRes", "close product response"));
+    eventBus.post(new CustomEvent(EventTo.INTERNAL, "closeProductRes", event.getProductName()));
   }
 }

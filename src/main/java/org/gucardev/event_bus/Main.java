@@ -6,7 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Main {
 
+  public static EventBus eventBus;
+
   public static void main(String[] args) {
+    sayHello();
     start();
   }
 
@@ -15,9 +18,9 @@ public class Main {
   }
 
   public static void start() {
-    EventBus eventBus = new EventBus();
+    eventBus = new EventBus();
     new InternalEventListener(eventBus);
     new ExternalEventListener(eventBus);
-    eventBus.post(new CustomEvent(EventTo.EXTERNAL, "closeProductReq", "close product request"));
+    eventBus.post(new CustomEvent(EventTo.EXTERNAL, "closeProductReq", "product1"));
   }
 }

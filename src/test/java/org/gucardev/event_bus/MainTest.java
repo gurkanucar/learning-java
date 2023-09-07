@@ -29,8 +29,7 @@ class MainTest {
 
   @Test
   void mainTest() {
-    Logger logger = (Logger) LoggerFactory.getLogger(Main.class);
-    Logger mainLogger = (Logger) LoggerFactory.getLogger(org.gucardev.log_test.Main.class);
+    Logger mainLogger = (Logger) LoggerFactory.getLogger(Main.class);
     ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
     listAppender.start();
     mainLogger.addAppender(listAppender);
@@ -40,9 +39,10 @@ class MainTest {
     otherLogger2.addAppender(listAppender);
 
     Main.start();
+    Main.eventBus.post(new CustomEvent(EventTo.EXTERNAL, "closeProductReq", "product2"));
 
     List<ILoggingEvent> logsList = listAppender.list;
 
-    assertTrue(logsList.get(1).getFormattedMessage().contains("Received INTERNAL event for route 'closeProductRes': close product response"));
+    assertTrue(logsList.get(1).getFormattedMessage().contains("Received INTERNAL event for route 'closeProductRes': product1"));
   }
 }

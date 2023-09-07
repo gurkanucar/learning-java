@@ -6,11 +6,11 @@ import lombok.Data;
 public class CustomEvent {
   private EventTo eventTo;
   private String route;
-  private String message;
+  private String productName;
 
-  public CustomEvent(EventTo eventTo, String route, String message) {
+  public CustomEvent(EventTo eventTo, String route, String productName) {
     this.eventTo = eventTo;
     this.route = route;
-    this.message = message;
+    this.productName = productName;
   }
 }
